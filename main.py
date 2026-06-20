@@ -1,4 +1,4 @@
-#
+
 #dataset handling
 import pandas as pd
 df=pd.read_csv("dataset.csv",encoding="latin-1",header=None)
@@ -19,6 +19,7 @@ def clean_text(text):
     return text
 df['clean_text'] = df['text'].apply(clean_text)
 print(df[['text','clean_text']].head())
+#Import Train-Test Split
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(
     df['clean_text'],
@@ -55,7 +56,3 @@ print(cm)
 #Get classification report
 from sklearn.metrics import classification_report
 print(classification_report(y_test, y_pred))
-import pickle
-pickle.dump(model, open("sentiment_model.pkl", "wb"))
-pickle.dump(vectorizer, open("vectorizer.pkl", "wb"))
-print("Model saved successfully")
